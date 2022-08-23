@@ -27,7 +27,7 @@ public class Test {
         $("[data-test-id= 'login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
         $("[data-test-id= 'action-login'").click();
-        $x("//span[@class='icon icon_size_m icon_name_bank-2449 icon_theme_alfa-on-white']").shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $("[ id ='root']").shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
     @org.junit.jupiter.api.Test
@@ -37,7 +37,7 @@ public class Test {
         $("[data-test-id= 'login'] input").setValue(notRegisteredUser.getLogin());
         $("[data-test-id='password'] input").setValue(notRegisteredUser.getPassword());
         $("[data-test-id= 'action-login'").click();
-        $("[data-test-id= 'error-notification'").shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $("[data-test-id= 'error-notification'").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"));
     }
 
     @org.junit.jupiter.api.Test
@@ -59,7 +59,7 @@ public class Test {
         $("[data-test-id= 'login'] input").setValue(wrongLogin);
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
         $("[data-test-id= 'action-login']").click();
-        $("[data-test-id= 'error-notification']").shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $("[data-test-id= 'error-notification']").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"));
 
     }
 
@@ -71,7 +71,7 @@ public class Test {
         $("[data-test-id= 'login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(wrongPassword);
         $("[data-test-id= 'action-login'").click();
-        $("[data-test-id= 'error-notification']").shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $("[data-test-id= 'error-notification']").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"));
 
     }
 
