@@ -3,7 +3,7 @@ package ru.netology.testmode.test;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
-import ru.netology.testmode.data.DataGenerator;
+import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
@@ -13,13 +13,15 @@ import static ru.netology.testmode.data.DataGenerator.Registration.getUser;
 import static ru.netology.testmode.data.DataGenerator.getRandomLogin;
 import static ru.netology.testmode.data.DataGenerator.getRandomPassword;
 
-public class Test {
+
+public class IBankTesting {
     @BeforeEach
     void setUp() {
         open("http://localhost:9999");
     }
 
-    @org.junit.jupiter.api.Test
+
+    @Test
     public void activeRegisteredUser() {
         Configuration.holdBrowserOpen = true;
         var registeredUser = getRegisteredUser("active");
@@ -30,7 +32,7 @@ public class Test {
         $("[ id ='root']").shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void notRegisteredUser() {
         Configuration.holdBrowserOpen = true;
         var notRegisteredUser = getUser("active");
@@ -40,7 +42,7 @@ public class Test {
         $("[data-test-id= 'error-notification'").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void blockedUser() {
         Configuration.holdBrowserOpen = true;
         var blockedUser = getRegisteredUser("blocked");
@@ -51,7 +53,7 @@ public class Test {
 
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void wrongLogin() {
         Configuration.holdBrowserOpen = true;
         var registeredUser = getRegisteredUser("active");
@@ -63,7 +65,7 @@ public class Test {
 
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void wrongPassword() {
         Configuration.holdBrowserOpen = true;
         var registeredUser = getRegisteredUser("active");
